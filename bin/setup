@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e;
+
+cd $(dirname $0)/..;
+
+dot_env_file=.env;
+if [ ! -e ${dot_env_file} ]; then
+  cp ${dot_env_file}{.example,};
+fi
