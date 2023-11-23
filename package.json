@@ -1,5 +1,5 @@
 {
-  "name": "chatgpt-cli",
+  "name": "chatgpt-tools",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -11,9 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "openai": "^3.2.1"
+    "openai": "^4.20.0"
   },
   "devDependencies": {
-    "prettier": "^2.8.8"
+    "prettier": "^3.1.0"
   }
 }

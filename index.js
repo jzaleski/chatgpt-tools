@@ -1,6 +1,6 @@
 import { createInterface } from 'node:readline/promises';
 import { env as environment, exit, stdin as input, stdout as output } from 'node:process';
-import { Configuration, OpenAIApi } from 'openai';
+import OpenAI from 'openai';
 
 const EXIT_COMMAND = 'exit';
 const SYSTEM_ROLE = 'system';
@@ -12,8 +12,7 @@ if (!apiKey?.length) {
   exit(1);
 }
 
-const configuration = new Configuration({ apiKey });
-const openAIApi = new OpenAIApi(configuration);
+const openAI = new OpenAI({ apiKey });
 const fitOutputToScreen = (environment.CHATGPT_CLI_FIT_OUTPUT_TO_SCREEN ?? 'true') === 'true';
 const model = environment.CHATGPT_CLI_MODEL ?? 'gpt-3.5-turbo';
 const prompt = environment.CHATGPT_CLI_PROMPT ?? '> ';
@@ -48,7 +47,7 @@ let userInput = await readline.question(`\nSay hello to your new assistant.\n\n$
 while (userInput !== EXIT_COMMAND) {
   messages.push({ role: USER_ROLE, content: userInput });
   try {
-    const response = await openAIApi.createChatCompletion({ messages, model });
+    const response = await openAI.chat.completions.create({ messages, model });
 
     const responseMessage = response?.data?.choices?.[0]?.message;
     if (responseMessage) {
